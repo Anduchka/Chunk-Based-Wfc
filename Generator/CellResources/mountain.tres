@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Cell" format=3 uid="uid://eoolr6jtp23k"]
+
+[ext_resource type="PackedScene" uid="uid://bk4qwdnraqp8b" path="res://Resources/OBJ/mountain.obj" id="1_o746i"]
+[ext_resource type="Script" uid="uid://q3lkqcpc7brs" path="res://Scripts/Cell.gd" id="2_3dy0u"]
+
+[resource]
+script = ExtResource("2_3dy0u")
+scene = ExtResource("1_o746i")
+can_rotate = true
+N = 4
+E = 4
+S = 4
+W = 4

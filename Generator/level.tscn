@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c3kgcxc7h5yvg"]
+
+[ext_resource type="Script" uid="uid://uapodv5bx2qd" path="res://Scripts/LevelController.gd" id="1_2d2dd"]
+[ext_resource type="Script" uid="uid://q3lkqcpc7brs" path="res://Scripts/Cell.gd" id="2_6ih0u"]
+[ext_resource type="PackedScene" uid="uid://brd5w327vyh6m" path="res://Generator/chunk.tscn" id="2_acjly"]
+[ext_resource type="Resource" uid="uid://c3casclagpski" path="res://Generator/CellResources/green.tres" id="4_nxdqw"]
+[ext_resource type="Resource" uid="uid://b3feb4id01pa5" path="res://Generator/CellResources/green_tree.tres" id="5_8rai8"]
+[ext_resource type="Resource" uid="uid://eoolr6jtp23k" path="res://Generator/CellResources/mountain.tres" id="6_5kph8"]
+[ext_resource type="Resource" uid="uid://cege6y478pejf" path="res://Generator/CellResources/river.tres" id="7_h0hms"]
+[ext_resource type="Resource" uid="uid://c3h6ulr5fj4y3" path="res://Generator/CellResources/river_end.tres" id="8_nhluq"]
+[ext_resource type="Resource" uid="uid://y1q1yqscdepf" path="res://Generator/CellResources/river_turn.tres" id="9_r7r0v"]
+[ext_resource type="Resource" uid="uid://btbxnufi30qgk" path="res://Generator/CellResources/river_t_turn.tres" id="10_wc08i"]
+[ext_resource type="Resource" uid="uid://ebrcbe1vh12d" path="res://Generator/CellResources/rock.tres" id="11_sqkgd"]
+[ext_resource type="Resource" uid="uid://dsmt7m468sugd" path="res://Generator/CellResources/rock_edge.tres" id="12_qpg4u"]
+[ext_resource type="Resource" uid="uid://c80la0j3n3kp" path="res://Generator/CellResources/rock_edge_in.tres" id="13_3xuuk"]
+[ext_resource type="Resource" uid="uid://my52tub0k0bn" path="res://Generator/CellResources/rock_edge_out.tres" id="14_x5t1b"]
+
+[node name="Level" type="Node3D" unique_id=2081639854]
+script = ExtResource("1_2d2dd")
+cells = Array[ExtResource("2_6ih0u")]([ExtResource("4_nxdqw"), ExtResource("5_8rai8"), ExtResource("6_5kph8"), ExtResource("7_h0hms"), ExtResource("8_nhluq"), ExtResource("9_r7r0v"), ExtResource("10_wc08i"), ExtResource("11_sqkgd"), ExtResource("12_qpg4u"), ExtResource("13_3xuuk"), ExtResource("14_x5t1b")])
+chunk_scene = ExtResource("2_acjly")
+edge_connections_weights = Dictionary[int, float]({
+1: 9.0,
+2: 0.5
+})
+tile_size = 0.5
+load_radius = 5
+unload_radius = 6

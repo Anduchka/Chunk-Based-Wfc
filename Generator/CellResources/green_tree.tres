@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Cell" format=3 uid="uid://b3feb4id01pa5"]
+
+[ext_resource type="PackedScene" uid="uid://c2u0kv227efr4" path="res://Resources/OBJ/green_tree.obj" id="1_40ow0"]
+[ext_resource type="Script" uid="uid://q3lkqcpc7brs" path="res://Scripts/Cell.gd" id="2_f0q0p"]
+
+[resource]
+script = ExtResource("2_f0q0p")
+scene = ExtResource("1_40ow0")
+weight = 3.0
+can_rotate = true
+N = 1
+E = 1
+S = 1
+W = 1

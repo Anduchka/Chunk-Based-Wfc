@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Cell" format=3 uid="uid://c3h6ulr5fj4y3"]
+
+[ext_resource type="PackedScene" uid="uid://fxxac7cr3fik" path="res://Resources/OBJ/river_end.obj" id="1_08rky"]
+[ext_resource type="Script" uid="uid://q3lkqcpc7brs" path="res://Scripts/Cell.gd" id="2_qwa2l"]
+
+[resource]
+script = ExtResource("2_qwa2l")
+scene = ExtResource("1_08rky")
+weight = 0.1
+can_rotate = true
+N = 6
+E = 6
+S = 6
+W = 2

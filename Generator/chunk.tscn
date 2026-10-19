@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://brd5w327vyh6m"]
+
+[ext_resource type="Script" uid="uid://dbdaoqtdvc3oj" path="res://Scripts/ChunkGenerator.gd" id="1_qcckc"]
+[ext_resource type="Resource" uid="uid://cs0fkg7v2n7rk" path="res://Generator/ConnectionRule.tres" id="2_ufguk"]
+
+[node name="Chunk" type="Node3D" unique_id=697418674]
+script = ExtResource("1_qcckc")
+connection_rule = ExtResource("2_ufguk")
+spawn_batch_size = 1

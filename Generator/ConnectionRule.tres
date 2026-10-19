@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ConnectionRule" format=3 uid="uid://cs0fkg7v2n7rk"]
+
+[ext_resource type="Script" uid="uid://dawyakvgtw45q" path="res://Scripts/ConnectionRule.gd" id="1_ca31c"]
+
+[resource]
+script = ExtResource("1_ca31c")
+allowed_pairs = Array[Vector2i]([Vector2i(2, 2), Vector2i(3, 3), Vector2i(3, 4), Vector2i(1, 1), Vector2i(6, 1)])

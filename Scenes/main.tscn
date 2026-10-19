@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c16bpltibs0x1"]
+
+[ext_resource type="PackedScene" uid="uid://c3kgcxc7h5yvg" path="res://Generator/level.tscn" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://dpbxc86w8k355" path="res://Scenes/test_camera.tscn" id="1_jjgbg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jjgbg"]
+
+[sub_resource type="Sky" id="Sky_bo1nx"]
+sky_material = SubResource("ProceduralSkyMaterial_jjgbg")
+
+[sub_resource type="Environment" id="Environment_8gbba"]
+background_mode = 2
+sky = SubResource("Sky_bo1nx")
+ambient_light_source = 3
+ssr_enabled = true
+sdfgi_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_jjvhh"]
+
+[node name="Main" type="Node3D" unique_id=293470778]
+
+[node name="Level" parent="." unique_id=2081639854 node_paths=PackedStringArray("player") instance=ExtResource("1_bo1nx")]
+player = NodePath("../TestCamera")
+
+[node name="TestCamera" parent="." unique_id=36924039 instance=ExtResource("1_jjgbg")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=575303811]
+environment = SubResource("Environment_8gbba")
+camera_attributes = SubResource("CameraAttributesPractical_jjvhh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1739384224]
+transform = Transform3D(0.93549955, 0.26620227, -0.23232943, 0.02978695, 0.59578645, 0.80259037, 0.3520701, -0.75774336, 0.5494286, 0, 0, 0)
+shadow_enabled = true

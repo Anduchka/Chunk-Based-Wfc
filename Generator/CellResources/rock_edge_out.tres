@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Cell" format=3 uid="uid://my52tub0k0bn"]
+
+[ext_resource type="PackedScene" uid="uid://nqtrwcx6tggu" path="res://Resources/OBJ/rock_edge_out.obj" id="1_1sikk"]
+[ext_resource type="Script" uid="uid://q3lkqcpc7brs" path="res://Scripts/Cell.gd" id="2_erykf"]
+
+[resource]
+script = ExtResource("2_erykf")
+scene = ExtResource("1_1sikk")
+weight = 0.5
+can_rotate = true
+N = 3
+E = 3
+S = 1
+W = 1
