@@ -23,8 +23,6 @@ To connect separate chunks, both sides calculate the same boundary requirements 
 
 **Work in progress.** This is my own WFC-inspired implementation, not a complete reproduction of the original algorithm. I'm continuing to experiment with generation quality, performance, and more reliable connections within and between chunks.
 
-The repository is intended as a small demonstration and a place to develop the system further, rather than a finished Godot add-on.
-
 ## Reference
 
 Inspired by [Maxim Gumin's WaveFunctionCollapse](https://github.com/mxgmn/WaveFunctionCollapse).
