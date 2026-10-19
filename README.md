@@ -1,6 +1,6 @@
 # Chunk-Based WFC — Godot 4
 
-A custom procedural level generation system developed for my game, *Backrooms Complex*. It is inspired by **Wave Function Collapse (WFC)** and adapted to generate large environments from smaller, independently generated chunks.
+A custom procedural level generation system developed for my game. It is inspired by **Wave Function Collapse (WFC)** and adapted to generate large environments from smaller, independently generated chunks.
 
 This repository is a simplified version of the game's generation system, separated from gameplay features so the algorithm can be explored and improved on its own.
 
