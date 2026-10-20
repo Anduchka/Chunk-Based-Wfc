@@ -21,7 +21,6 @@ var active_chunks : Dictionary = {}
 var current_player_chunk: Vector2i = Vector2i(999999, 999999)
 
 var chunk_queue : Array[Vector2i] = []
-var creating_chunk : bool = false
 
 var chunk_world_size : float = 0
 
@@ -48,6 +47,8 @@ func _process(_delta: float) -> void:
 	
 	if player_chunk != current_player_chunk:
 		update_chunks()
+	
+	process_chunk_queue()
 
 func get_player_chunk() -> Vector2i:
 	return Vector2i(
@@ -82,22 +83,19 @@ func load_chunks_around(center : Vector2i) -> void:
 				func(a, b):
 				return a.distance_squared_to(center) < b.distance_squared_to(center)
 			)
-	
-	if not creating_chunk:
-		process_chunk_queue()
 
 func process_chunk_queue() -> void:
-	creating_chunk = true
+	if chunk_queue.is_empty():
+		return
 	
-	while not chunk_queue.is_empty():
-		var coord : Vector2i = chunk_queue.pop_front()
-		
-		if not active_chunks.has(coord):
-			create_chunk(coord)
-		
-		await get_tree().process_frame
+	for c in active_chunks:
+		if active_chunks[c].generating:
+			return
 	
-	creating_chunk = false
+	var coord : Vector2i = chunk_queue.pop_front()
+		
+	if not active_chunks.has(coord):
+		create_chunk(coord)
 
 func unload_far_chunks(center: Vector2i) -> void:
 	var to_remove : Array[Vector2i] = []

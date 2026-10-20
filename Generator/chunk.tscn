@@ -6,4 +6,3 @@
 [node name="Chunk" type="Node3D" unique_id=697418674]
 script = ExtResource("1_qcckc")
 connection_rule = ExtResource("2_ufguk")
-spawn_batch_size = 1

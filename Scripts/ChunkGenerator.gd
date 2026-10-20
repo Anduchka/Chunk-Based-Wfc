@@ -15,6 +15,7 @@ var variants : Array[CellVariant] = []
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 var grid = []
+var weight_grid = []
 
 var valid_points : Array[Vector3]
 
@@ -22,6 +23,8 @@ var north_edge : Array[int] = []
 var east_edge : Array[int] = []
 var south_edge : Array[int] = []
 var west_edge : Array[int] = []
+
+var generating : bool = false
 
 func setup(controller : LevelController, coord: Vector2i, size_value: int, tile_value: float, seed_value: int) -> void:
 	chunk_coord = coord
@@ -32,6 +35,8 @@ func setup(controller : LevelController, coord: Vector2i, size_value: int, tile_
 	level_controller = controller
 	
 	connection_rule.build_lookup()
+	
+	generating = true
 	
 	get_edges()
 	generate_variants()
@@ -61,18 +66,25 @@ func generate_chunk() -> void:
 
 func try_generate() -> bool:
 	grid.clear()
+	weight_grid.clear()
 	
 	for x in range(chunk_size):
 		grid.append([])
+		weight_grid.append([])
 		
 		for y in range(chunk_size):
 			grid[x].append(null)
+			weight_grid[x].append([null])
+	
+	build_weight_grid()
 	
 	var success : bool = generate_positions()
 	
 	if success:
 		spawn_chunk()
-		
+	
+	generating = false
+	
 	return success
 
 func generate_positions() -> bool:
@@ -82,7 +94,7 @@ func generate_positions() -> bool:
 		return true
 	
 	var pos : Vector2i = selection["pos"]
-	var valid : Array[CellVariant] = selection["valid"]
+	var valid : Array = selection["valid"]
 	
 	if valid.is_empty():
 		return false
@@ -91,39 +103,62 @@ func generate_positions() -> bool:
 	
 	for v in valid:
 		grid[pos.x][pos.y] = v
+		rebuild_weight_grid(pos)
 		
 		if check_future_neighbors(pos) and generate_positions():
 			return true
 		
 		grid[pos.x][pos.y] = null
+		rebuild_weight_grid(pos)
 	
 	return false
 
+func build_weight_grid() -> void:
+	for x in range(chunk_size):
+		for y in range(chunk_size):
+			
+			if grid[x][y] != null:
+				continue
+			
+			weight_grid[x][y] = get_valid_variants(x, y)
+
+func rebuild_weight_grid(coord : Vector2i) -> void:
+	for dir in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
+		var pos : Vector2i = coord + dir
+		
+		if pos.x < 0 or pos.x >= chunk_size:
+			continue
+		if pos.y < 0 or pos.y >= chunk_size:
+			continue
+		
+		if grid[pos.x][pos.y] != null:
+			continue
+		
+		weight_grid[pos.x][pos.y] = get_valid_variants(pos.x, pos.y)
+
 func find_next_cell() -> Dictionary:
 	var best_pos : Vector2i = Vector2i(-1, -1)
-	var best_valid : Array[CellVariant] = []
+	var best_score : int = 999999
 	
 	for x in range(chunk_size):
 		for y in range(chunk_size):
 			if grid[x][y] != null:
 				continue
 			
-			var valid : Array[CellVariant] = get_valid_variants(x, y)
+			var valid : Array = weight_grid[x][y]
 			
-			if valid.is_empty():
+			if valid.size() <= 1:
 				return {"pos": Vector2i(x, y), "valid": valid}
 			
-			if best_pos.x == -1 or valid.size() < best_valid.size():
-				best_pos = Vector2i(x, y)
-				best_valid = valid
+			if best_score > valid.size():
+				best_score = valid.size()
 				
-				if valid.size() == 1:
-					return {"pos": best_pos, "valid": best_valid}
+				best_pos = Vector2i(x, y)
 	
 	if best_pos.x == -1:
 		return {}
 	
-	return {"pos": best_pos,"valid": best_valid}
+	return {"pos": best_pos,"valid": weight_grid[best_pos.x][best_pos.y]}
 
 func check_future_neighbors(pos : Vector2i) -> bool:
 	for dir in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
@@ -140,9 +175,9 @@ func check_future_neighbors(pos : Vector2i) -> bool:
 	
 	return true
 
-func shuffle_variants(list : Array[CellVariant]) -> Array[CellVariant]:
+func shuffle_variants(list : Array) -> Array[CellVariant]:
 	var result : Array[CellVariant] = []
-	var pool : Array[CellVariant] = list.duplicate()
+	var pool : Array = list.duplicate()
 	
 	while not pool.is_empty():
 		var chosen : CellVariant = pick_weighted(pool)
@@ -160,7 +195,7 @@ func get_valid_variants(x : int, y : int) -> Array[CellVariant]:
 	
 	return result
 
-func pick_weighted(list : Array[CellVariant]) -> CellVariant:
+func pick_weighted(list : Array) -> CellVariant:
 	var total_weight: float = 0.0
 	
 	for v in list:

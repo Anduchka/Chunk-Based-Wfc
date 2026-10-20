@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Cell" format=3 uid="uid://btbxnufi30qgk"]
 
-[ext_resource type="PackedScene" uid="uid://chrjepeydhgbu" path="res://Resources/OBJ/river_turn.obj" id="1_5lvut"]
+[ext_resource type="PackedScene" uid="uid://dcvtugj4c7e1e" path="res://Resources/OBJ/river_t_turn.obj" id="1_5lvut"]
 [ext_resource type="Script" uid="uid://q3lkqcpc7brs" path="res://Scripts/Cell.gd" id="2_vcwxs"]
 
 [resource]
@@ -10,5 +10,5 @@ weight = 0.05
 can_rotate = true
 N = 2
 E = 2
-S = 6
+S = 5
 W = 2

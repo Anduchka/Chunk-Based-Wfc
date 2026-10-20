@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_dmwls")
 scene = ExtResource("1_k0rcl")
-weight = 2.0
+weight = 0.1
 can_rotate = true
 N = 1
 E = 3

@@ -14,6 +14,10 @@ config/name="ChunkBasedWFC"
 run/main_scene="uid://c16bpltibs0x1"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[display]
+
+window/size/mode=3
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
